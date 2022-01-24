@@ -2,7 +2,7 @@ import 'package:preparacion_parcial/api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'student.dart';
-import 'details.dart';
+import 'Pages/details_page.dart';
 
 // ignore: must_be_immutable
 class StudentsListView extends StatelessWidget {

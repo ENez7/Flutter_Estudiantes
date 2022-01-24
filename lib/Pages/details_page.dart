@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'api_services.dart';
-import 'student.dart';
-import 'edit_student.dart';
+import '../api_services.dart';
+import '../student.dart';
+import 'edit_student_page.dart';
 
 // ignore: must_be_immutable
 class StudentDetails extends StatefulWidget {

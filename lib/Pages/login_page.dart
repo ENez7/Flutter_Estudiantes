@@ -56,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   Padding emailBox() {
+    // final emailBox = Padding
     return Padding(
       padding: const EdgeInsets.only(top: 50, left: 50, right: 50),
       child: Container(

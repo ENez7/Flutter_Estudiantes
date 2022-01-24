@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'student.dart';
+import '../student.dart';
 import 'package:preparacion_parcial/api_services.dart';
 import 'dart:core';
 
-class EditStudent extends StatelessWidget {
-  Student student;
+class AddStudent extends StatelessWidget {
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
-
-  EditStudent(this.student);
 
   ApiServices apiServices = ApiServices();
 
@@ -17,7 +14,7 @@ class EditStudent extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Editar entrada",
+          "Añadir entrada",
           style: TextStyle(color: Color(0xFF356859)),
         ),
         backgroundColor: Color(0xFFFFFBE6),
@@ -150,13 +147,13 @@ class EditStudent extends StatelessWidget {
                     firstName.text,
                     DateTime.now(),
                   );
-                  apiServices.putStudent(student.studentID, newStudent);
+                  apiServices.postStudent(newStudent);
                   Navigator.pop(context);
                 },
                 color: Color(0xFFFFFBE6),
                 splashColor: Color(0xFF356859),
                 child: Text(
-                  "Editar estudiante",
+                  "Añadir estudiante",
                   style: TextStyle(
                     color: Color(0xFF356859),
                   ),

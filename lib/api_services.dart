@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:http/http.dart';
 import 'package:preparacion_parcial/student.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServices {
   final String url = "https://appserviceenrique.azurewebsites.net/api/Students";
-
   /*
     <<< GET FUNCTION >>>
   */
@@ -23,8 +21,6 @@ class ApiServices {
         'Authorization': 'Bearer $token',
       },
     );
-    // print("Token: " + token);
-    // print("Code: " + response.statusCode.toString());
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       return jsonResponse.map((job) => new Student.fromJson(job)).toList();
@@ -87,7 +83,7 @@ class ApiServices {
   /*
     <<< PUT FUNCTION >>>
   */
-  Future<Student> putStudent(int id, Student student) async {
+  void putStudent(int id, Student student) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String token = sharedPreferences.getString('token');
     Map data = {
@@ -107,14 +103,6 @@ class ApiServices {
       },
       body: jsonEncode(data),
     );
-
-    // print("Code: $id");
-    // print("Code: ${response.statusCode}");
-
-    // if (response.statusCode == 204)
-    //   return Student.fromJson(json.decode(response.body));
-    // else
-    //   throw Exception("Failed to update a student");
     if (response.statusCode != 204)
       throw Exception("Failed to update a student");
   }

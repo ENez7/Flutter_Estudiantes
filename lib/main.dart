@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'login.dart';
+import 'Pages/login_page.dart';
 import 'student_list.dart';
-import 'add_student.dart';
+import 'Pages/add_student_page.dart';
 
 void main() => runApp(Practica());
 
@@ -92,8 +92,9 @@ class _InicioState extends State<Inicio> {
             MaterialPageRoute(builder: (context) => AddStudent()),
           );
         },
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25.0),
+        ),
       ),
     );
   }
