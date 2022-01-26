@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../api_services.dart';
+
 import '../student.dart';
+import '../api_services.dart';
 import 'edit_student_page.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +16,6 @@ class _StudentDetailsState extends State<StudentDetails> {
   final ApiServices apiServices = ApiServices();
   @override
   Widget build(BuildContext context) {
-    int? id = widget.student.studentID;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -146,7 +146,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                   margin: EdgeInsets.fromLTRB(70, 50, 0, 10.0),
                   child: Row(
                     children: [
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -155,8 +155,12 @@ class _StudentDetailsState extends State<StudentDetails> {
                             ),
                           );
                         },
-                        splashColor: Color(0xFFFFFBE6),
-                        color: Color(0xFF356859),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xFF356859)),
+                          overlayColor:
+                              MaterialStateProperty.all(Color(0xFFFFFBE6)),
+                        ),
                         child: Text(
                           'Edit',
                           style: TextStyle(
@@ -167,13 +171,17 @@ class _StudentDetailsState extends State<StudentDetails> {
                       SizedBox(
                         width: 40.0,
                       ),
-                      RaisedButton(
+                      ElevatedButton(
                         onPressed: () {
                           apiServices.deleteStudent(widget.student.studentID);
                           Navigator.pop(context);
                         },
-                        splashColor: Color(0xFFFFFBE6),
-                        color: Color(0xFF356859),
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Color(0xFF356859)),
+                          overlayColor:
+                              MaterialStateProperty.all(Color(0xFFFFFBE6)),
+                        ),
                         child: Text(
                           'Delete',
                           style: TextStyle(color: Color(0xFFFFFBE6)),

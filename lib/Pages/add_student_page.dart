@@ -1,13 +1,13 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
+
 import '../student.dart';
 import 'package:preparacion_parcial/api_services.dart';
-import 'dart:core';
 
 class AddStudent extends StatelessWidget {
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
-
-  ApiServices apiServices = ApiServices();
+  final ApiServices apiServices = ApiServices();
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class AddStudent extends StatelessWidget {
               ),
             ),
             Center(
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {
                   Student newStudent = Student.newStudent(
                     50,
@@ -150,8 +150,12 @@ class AddStudent extends StatelessWidget {
                   apiServices.postStudent(newStudent);
                   Navigator.pop(context);
                 },
-                color: Color(0xFFFFFBE6),
-                splashColor: Color(0xFF356859),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color(0xFF356859)),
+                  overlayColor: MaterialStateProperty.all(Color(0xFF356859)),
+                ),
+                // color: Color(0xFFFFFBE6),
+                // splashColor: Color(0xFF356859),
                 child: Text(
                   "Añadir estudiante",
                   style: TextStyle(

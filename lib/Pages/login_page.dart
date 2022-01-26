@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:preparacion_parcial/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:preparacion_parcial/main.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -15,6 +16,12 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+
+  update(_isLoading) {
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   final verticalText = Padding(
     padding: const EdgeInsets.only(top: 60.0, left: 10.0),
@@ -57,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   Padding emailBox() {
-    // final emailBox = Padding
     return Padding(
       padding: const EdgeInsets.only(top: 50, left: 50, right: 50),
       child: Container(
@@ -124,18 +130,20 @@ class _LoginPageState extends State<LoginPage> {
     Map data = {'grant_type': 'password', 'username': email, 'password': pass};
     var jsonResponse;
     var response = await http.post(
-        Uri.parse("https://appserviceenrique.azurewebsites.net/token"),
-        body: data);
+      Uri.parse("https://appserviceenrique.azurewebsites.net/token"),
+      body: data,
+    );
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       if (jsonResponse != null) {
-        setState(() {
-          _isLoading = false;
-        });
+        update(_isLoading);
         sharedPreferences.setString("token", jsonResponse['access_token']);
         Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context) => Inicio()),
-            (Route<dynamic> route) => false);
+          MaterialPageRoute(
+            builder: (BuildContext context) => Inicio(),
+          ),
+          (Route<dynamic> route) => false,
+        );
       }
     }
   }
@@ -151,13 +159,11 @@ class _LoginPageState extends State<LoginPage> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
         ),
-        child: FlatButton(
+        child: ElevatedButton(
           onPressed: emailController.text == "" || passController.text == ""
               ? null
               : () {
-                  setState(() {
-                    _isLoading = true;
-                  });
+                  update(_isLoading);
                   signIn(emailController.text, passController.text);
                 },
           child: Row(
@@ -188,10 +194,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            //colors: [const Color(0xff023C47), const Color(0xff207C7E)],
             colors: [Color(0xFFFFFBE6), Color(0xFFFFFBE6)],
-            // begin: Alignment.topRight,
-            // end: Alignment.bottomLeft,
           ),
         ),
         child: ListView(

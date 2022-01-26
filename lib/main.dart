@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Pages/login_page.dart';
+
 import 'student_list.dart';
+import 'Pages/login_page.dart';
 import 'Pages/add_student_page.dart';
 
 void main() => runApp(Practica());
@@ -54,11 +55,9 @@ class _InicioState extends State<Inicio> {
         ),
         backgroundColor: Color(0xFFFFFBE6),
         actions: [
-          FlatButton(
+          TextButton(
             onPressed: () {
               sharedPreferences.clear();
-              // ignore: deprecated_member_use
-              sharedPreferences.commit();
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
                       builder: (BuildContext context) => LoginPage()),
