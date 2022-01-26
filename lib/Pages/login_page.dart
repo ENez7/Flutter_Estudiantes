@@ -5,7 +5,7 @@ import 'package:preparacion_parcial/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,9 +23,10 @@ class _LoginPageState extends State<LoginPage> {
       child: Text(
         "Sign in",
         style: TextStyle(
-            color: Color(0xFF356859),
-            fontSize: 38.0,
-            fontWeight: FontWeight.w900),
+          color: Color(0xFF356859),
+          fontSize: 38.0,
+          fontWeight: FontWeight.w900,
+        ),
       ),
     ),
   );
@@ -122,8 +123,9 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     Map data = {'grant_type': 'password', 'username': email, 'password': pass};
     var jsonResponse;
-    var response = await http
-        .post("https://appserviceenrique.azurewebsites.net/token", body: data);
+    var response = await http.post(
+        Uri.parse("https://appserviceenrique.azurewebsites.net/token"),
+        body: data);
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       if (jsonResponse != null) {

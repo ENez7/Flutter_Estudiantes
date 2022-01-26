@@ -15,7 +15,7 @@ class _StudentDetailsState extends State<StudentDetails> {
   final ApiServices apiServices = ApiServices();
   @override
   Widget build(BuildContext context) {
-    int id = widget.student.studentID;
+    int? id = widget.student.studentID;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -62,7 +62,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                         ),
                       ),
                       Text(
-                        widget.student.lastName,
+                        widget.student.lastName!,
                         style: TextStyle(
                           color: Color(0xFF356859),
                           fontSize: 25.0,
@@ -83,7 +83,7 @@ class _StudentDetailsState extends State<StudentDetails> {
                         ),
                       ),
                       Text(
-                        widget.student.firstName,
+                        widget.student.firstName!,
                         style: TextStyle(
                           color: Color(0xFF356859),
                           fontSize: 25.0,

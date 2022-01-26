@@ -7,7 +7,7 @@ import 'Pages/add_student_page.dart';
 void main() => runApp(Practica());
 
 class Practica extends StatelessWidget {
-  const Practica({Key key}) : super(key: key);
+  const Practica({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +20,14 @@ class Practica extends StatelessWidget {
 }
 
 class Inicio extends StatefulWidget {
-  Inicio({Key key}) : super(key: key);
+  Inicio({Key? key}) : super(key: key);
 
   @override
   _InicioState createState() => _InicioState();
 }
 
 class _InicioState extends State<Inicio> {
-  SharedPreferences sharedPreferences;
+  late SharedPreferences sharedPreferences;
   @override
   void initState() {
     super.initState();

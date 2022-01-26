@@ -7,7 +7,7 @@ import 'Pages/details_page.dart';
 // ignore: must_be_immutable
 class StudentsListView extends StatelessWidget {
   final ApiServices apiServices = ApiServices();
-  SharedPreferences sharedPreferences;
+  SharedPreferences? sharedPreferences;
 
   refreshState() {
     StudentsListView();
@@ -16,7 +16,7 @@ class StudentsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ListTile _tile(
-        int id, String lastName, String firstName, DateTime enrollmentDate) {
+        int? id, String lastName, String firstName, DateTime? enrollmentDate) {
       Student student =
           Student.newStudent(id, lastName, firstName, enrollmentDate);
       return ListTile(
@@ -67,7 +67,7 @@ class StudentsListView extends StatelessWidget {
       future: apiServices.getStudents(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<Student> data = snapshot.data;
+          List<Student> data = snapshot.data!;
           return _studentsListView(data);
         } else if (snapshot.hasError) {
           return Text("${snapshot.error}");

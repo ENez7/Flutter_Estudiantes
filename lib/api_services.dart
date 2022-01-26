@@ -11,10 +11,10 @@ class ApiServices {
   */
   Future<List<Student>> getStudents() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString('token'); // OBTENER TOKEN
+    String? token = sharedPreferences.getString('token'); // OBTENER TOKEN
 
     final response = await http.get(
-      url,
+      Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -31,10 +31,10 @@ class ApiServices {
 
   Future<Student> getStudent(int id) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString('token');
+    String? token = sharedPreferences.getString('token');
 
     final response = await http.get(
-      '$url/$id',
+      Uri.parse('$url/$id'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',
@@ -53,7 +53,7 @@ class ApiServices {
   */
   Future<Student> postStudent(Student student) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString('token');
+    String? token = sharedPreferences.getString('token');
     Map data = {
       'StudentID': student.studentID,
       'LastName': student.lastName,
@@ -63,7 +63,7 @@ class ApiServices {
     };
 
     final response = await http.post(
-      url,
+      Uri.parse(url),
       headers: {
         'Content-Type': 'application/json',
         //'Accept': 'application/json',
@@ -83,9 +83,9 @@ class ApiServices {
   /*
     <<< PUT FUNCTION >>>
   */
-  void putStudent(int id, Student student) async {
+  void putStudent(int? id, Student student) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString('token');
+    String? token = sharedPreferences.getString('token');
     Map data = {
       'StudentID': id,
       'LastName': student.lastName,
@@ -95,7 +95,7 @@ class ApiServices {
     };
 
     final response = await http.put(
-      '$url/$id',
+      Uri.parse('$url/$id'),
       headers: {
         'Content-Type': 'application/json',
         //'Accept': 'application/json',
@@ -110,12 +110,12 @@ class ApiServices {
   /*
     <<< DELETE FUNCTION >>>
   */
-  Future<void> deleteStudent(int id) async {
+  Future<Student> deleteStudent(int? id) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String token = sharedPreferences.getString('token');
+    String? token = sharedPreferences.getString('token');
 
     final response = await http.delete(
-      '$url/$id',
+      Uri.parse('$url/$id'),
       headers: {
         'Authorization': 'Bearer $token',
       },
